@@ -60,6 +60,7 @@ export function startServer(subscriptionInterval = 1000, debug = false): Promise
       const grpcObject = loadPackageDefinition(packageDefinition);
       server.addService((grpcObject.Example as ServiceClientConstructor).service, {
         getMovies(call, callback) {
+          console.log(JSON.stringify(call.request, null, 2))
           const result = Movies.filter(movie => {
             for (const [key, value] of Object.entries(call.request.movie)) {
               if (movie[key] === value) {
